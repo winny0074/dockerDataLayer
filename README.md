@@ -12,7 +12,7 @@ This docker builds a mysql image
 
  - Dockerfile
 
- - reources:
+ - ressources:
  
    -- dump.sql : sql script to init your database
 
