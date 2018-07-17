@@ -1,0 +1,62 @@
+#!/bin/bash
+
+echo 'do it'
+
+
+args=("$@")
+
+if [ ${#args[@]} -eq 0 ]; then
+ echo no arguments
+else
+
+ echo Number of arguments: $#
+ for i in "${args[@]}" 
+ do 
+	echo $i
+ done
+ 
+ users=(John Harry Jake Scott Philis)  
+ for u in "${users[@]}"  
+ do  
+    echo "$u is a registered user"
+ done
+fi	
+
+while getopts 'lha:' OPTION; do
+  case "$OPTION" in
+    l)
+      echo "linuxconfig"
+      ;;
+
+    h)
+      echo "h stands for h"
+      ;;
+
+    a)
+      avalue="$OPTARG"
+      echo "The value provided is $OPTARG"
+      ;;
+    ?)
+      echo "script usage: $(basename $0) [-l] [-h] [-a somevalue]" >&2
+      exit 1
+      ;;
+  esac
+done
+
+i=("$@")
+ 
+echo number of param ${#i[@]}
+
+i1=${#i[@]}
+for j in "${i[@]}"
+do
+
+  echo 'index '$((i1-1))
+i1=$((i1-1))
+done
+
+
+sed -irne "s/port_shutdown/8005/g" resources/server.xml
+sed -irne "s/port_http/8080/g" resources/server.xml
+sed -irne "s/port_ajp/9090/g" resources/server.xml
+
